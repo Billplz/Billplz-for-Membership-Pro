@@ -25,9 +25,9 @@ class os_billplz extends MPFPayment
     {
         parent::__construct($params, $config);
 
-        $this->api_key = $params->get('api_key');
-        $this->collection_id = $params->get('collection_id');
-        $this->x_signature = $params->get('x_signature');
+        $this->api_key = trim($params->get('api_key'));
+        $this->collection_id = trim($params->get('collection_id'));
+        $this->x_signature = trim($params->get('x_signature'));
     }
 
     /**
@@ -53,9 +53,9 @@ class os_billplz extends MPFPayment
             'email'=> $row->email,
             'name' => substr("{$row->first_name} {$row->last_name}", 0, 255),
             'amount' => strval(round($data['amount'], 2) * 100),
-            'mobile' => $row->phone,
+            'mobile' => trim($row->phone),
             'callback_url' => $siteUrl . 'index.php?option=com_osmembership&task=payment_confirm&payment_method=os_billplz',
-            'description' => substr($data['item_name'], 0, 200)
+            'description' => substr(trim($data['item_name']), 0, 200)
         );
 
         $optional = array(
@@ -88,7 +88,8 @@ class os_billplz extends MPFPayment
         try {
             $data = BillplzConnect::getXSignature($this->x_signature);
         } catch (\Exception $e) {
-            return false;
+            throw new Exception('Failed to verify data integrity');
+            exit;
         }
 
         $this->notificationData = $data;
