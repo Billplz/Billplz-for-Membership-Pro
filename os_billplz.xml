@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install version="3.0.0" type="osmplugin" group="payment">
+    <name>os_billplz</name>
+    <title>Billplz</title>
+    <author>Billplz</author>
+    <creationDate>17-12-2018</creationDate>
+    <copyright>2018</copyright>
+    <license>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU/GPL version 2</license>
+    <authorEmail>team@billplz.com</authorEmail>
+    <authorUrl>www.billplz.com</authorUrl>
+    <version>3.0.0</version>
+    <description>Billplz For Membership Pro Extension</description>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/administrator/components/com_osmembership/elements">
+                <field name="api_key" type="text" size="40" label="API Secret Key" description="Enter your Billplz API Secret Key" default=""></field>
+                <field name="collection_id" type="text" size="40" label="Collection ID" description="Enter your Billplz Collection ID" default=""></field>
+                <field name="x_signature" type="text" size="40" label="X Signature Key" description="Enter your Billplz X Signature Key" default=""></field>
+                <field name="payment_fee_amount" type="text" label="Fixed Payment Processing Fee (RM)" description=""></field>
+                <field name="payment_fee_percent" type="text" label="Payment Processing Fee (%)" description=""></field>
+                <field name="ipn_log" type="list" label="Log Redirect and Callback Request"
+                       description="This is only used for debug purpose when requested. Please set it to No unless requested by our support team"
+                       default="0">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+    <files>
+        <filename>os_billplz.php</filename>
+        <folder>lib</folder>
+    </files>
+</install>
